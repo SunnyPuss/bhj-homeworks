@@ -6,13 +6,15 @@ const arrMS = Array.from(menuSub);
 
 console.log (arrMS.length);
 
+ 
+
 arrML.forEach ((el) => {el.addEventListener(`click`, () => {
-    if (el.closest(`a`).nextElementSibling.classList.contains(`menu_sub`)) {
-        el.closest(`a`).nextElementSibling.classList.add(`menu_active`);
+    let ulNeighbour = el.closest(`a`).nextElementSibling;
+    if (ulNeighbour.classList.contains(`menu_sub`)) {
+        ulNeighbour.classList.toggle(`menu_active`);
         event.preventDefault();
-    } else if (el.closest(`a`).nextElementSibling.classList.contains(`menu_active`)) {
-        el.closest(`a`).nextElementSibling.classList.toggle(`menu_active`);
-    };
+    } 
+    
     
 })
 });
