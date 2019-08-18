@@ -7,15 +7,19 @@ let n = 1
 console.log(images.length);
 
 arrowRight.onclick = function() {
-    images[n++].classList.toggle(`slider__item_active`);
+    for (n = 1; n < images.length; n++) {
+        images[n].classList.remove(`slider__item_active`);
+    }
     if (n >= images.length) {
         n = 0;
     }
+    images[n++].classList.add(`slider__item_active`);
 }
 
-arrowLeft.onclick = function() {
+/*arrowLeft.onclick = function() {
     images[n--].classList.toggle(`slider__item_active`);
     if (n < 0) {
         n = images.length - 1;
     }
 }
+*/
