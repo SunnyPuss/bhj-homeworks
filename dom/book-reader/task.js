@@ -4,32 +4,26 @@ const medium = font.item(1);
 const large = document.querySelector(`.font-size_big`)
 const book = document.querySelector(`.book`)
 
-small.addEventListener(`click`, () => {
+function changeFont() {
     const active = document.querySelector(`.font-size_active`);
     active.classList.remove(`font-size_active`);
 
-    small.classList.add(`font-size_active`);
-    book.classList.remove(`book_fs-big`)
-    book.classList.add(`book_fs-small`);
+    this.classList.add(`font-size_active`);
+    if (this.getAttribute(`data-size`) == `small`) {
+        book.classList.remove(`book_fs-big`)
+        book.classList.add(`book_fs-small`);
+    } else if (this.getAttribute(`data-size`) == `big`) {
+        book.classList.remove(`book_fs-small`);
+        book.classList.add(`book_fs-big`)
+    } else {
+        book.classList.remove(`book_fs-small`);
+        book.classList.remove(`book_fs-big`);
+    }
     event.preventDefault();
-});
+}
 
-medium.addEventListener(`click`, () => {
-    const active = document.querySelector(`.font-size_active`);
-    active.classList.remove(`font-size_active`);
+small.addEventListener(`click`, changeFont);
 
-    medium.classList.add(`font-size_active`);
-    book.classList.remove(`book_fs-small`);
-    book.classList.remove(`book_fs-big`);
-    event.preventDefault();
-});
+medium.addEventListener(`click`, changeFont);
 
-large.addEventListener(`click`, () => {
-    const active = document.querySelector(`.font-size_active`);
-    active.classList.remove(`font-size_active`);
-
-    large.classList.add(`font-size_active`);
-    book.classList.remove(`book_fs-small`);
-    book.classList.add(`book_fs-big`);
-    event.preventDefault();
-});
+large.addEventListener(`click`, changeFont);
