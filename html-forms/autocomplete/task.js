@@ -68,6 +68,11 @@ class Autocomplete {
   }
 
   getMatches( text ) {
+    
+    this.input.addEventListener(`change`, () => {
+      if (text.includes(`${this.input.options}`))
+    })
+
     /*
       TODO: этот метод нужно дописать
       text - фраза, которую вводят в поле поиска
