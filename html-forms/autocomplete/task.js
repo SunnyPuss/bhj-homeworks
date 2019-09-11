@@ -68,9 +68,22 @@ class Autocomplete {
   }
 
   getMatches( text ) {
+    let matchesArray = [];
     
-    this.input.addEventListener(`change`, () => {
-      if (text.includes(`${this.input.options}`))
+    this.input.addEventListener(`input`, () => {
+        let words = this.input.options;
+
+        for (let i = 0; i < words.length; i++) {
+          if (words[i].includes(`${text}`)) {
+            matchesArray.push(
+              {
+                text: `${words[i].text}`,
+                value: `${words[i].value}`
+              }
+            )
+          }
+        }
+    
     })
 
     /*
@@ -86,12 +99,7 @@ class Autocomplete {
         value: 'Содержимое атрибута value'
       }
     */
-    return [
-      {
-        text: 'Чубакка',
-        value: '1'
-      }
-    ];
+    return matchesArray;
   }
 }
 
