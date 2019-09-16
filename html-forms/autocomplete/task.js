@@ -75,10 +75,7 @@ class Autocomplete {
     const optionsArr = Array.from(variants);
     
     for (let i = 0; i < optionsArr.length; i++) {
-      /*if 
-      (optionsArr.includes(`${text}`) == true) тоже не работает
-      */
-      if (optionsArr.includes(text) == true) {
+     if (optionsArr[i].text.includes(text)) {
         matchesArray.push(
           {
             text: `${variants[i].textContent}`,
