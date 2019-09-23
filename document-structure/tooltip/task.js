@@ -1,38 +1,23 @@
 const hasTooltip = document.querySelectorAll(`.has-tooltip`);
+const hasTooltipArr = Array.from(hasTooltip);
 
-let tooltipHelp = document.createElement(`div`);
-tooltipHelp.classList.add(`tooltip`);
-tooltipHelp.innerText = `Что бы вы хотели?`;
-hasTooltip.item(0).insertAdjacentElement("afterend", tooltipHelp);
-
-hasTooltip.item(0).addEventListener(`click`, (event) => {
-    tooltipHelp.classList.toggle(`tooltip_active`);
+hasTooltip.forEach((el) => {el.addEventListener(`click`, function () {
+    el.insertAdjacentHTML("afterend", 
+    `<div class="tooltip" style="left: 0; top: 0">${el.title}</div>`
+    );
+    const tooltip = document.querySelector(`.tooltip`);
+    tooltip.classList.toggle(`tooltip_active`);
     event.preventDefault();
-})
 
-let tooltipPress = document.createElement(`div`);
-hasTooltip.item(1).insertAdjacentElement("afterend", tooltipPress);
-tooltipPress.classList.add(`tooltip`);
-tooltipPress.innerText = `Устройтесь на работу!`;
-tooltipPress.setAttribute(`style`, `left: 20; top: 10`);
-/*Числа у left и top ни на что не влияют*/
+    /*if (el.title == `Что бы вы хотели?`) {
+        tooltip.style = `left: 6px; top: 25px`;
+    } else if (el.title == `Устройтесь на работу!`) {
+        tooltip.style = `left: 162px; top: 25px`
+    }*/
 
-hasTooltip.item(1).addEventListener(`click`, () => {
-    tooltipPress.classList.toggle(`tooltip_active`);
-    event.preventDefault();
-})
-
-let tooltipEnd = document.createElement(`div`);
-hasTooltip.item(2).insertAdjacentElement("afterend", tooltipEnd)
-tooltipEnd.classList.add(`tooltip`);
-tooltipEnd.setAttribute(`style`, `left: 0; top: 0`);
-/*А здесь при иных значениях left и top подсказка исчезает куда-то */
-tooltipEnd.innerText = `Выхода нет, скоро рассвет.`;
-
-hasTooltip.item(2).addEventListener(`click`, () => {
-    tooltipEnd.classList.toggle(`tooltip_active`);
-    event.preventDefault();
-})
+    tooltip.style = `${el.getBoundingClientRect()}`;
+    
+})})
 
 
 

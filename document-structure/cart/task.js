@@ -16,3 +16,6 @@ productIncArr.forEach((el) => {el.addEventListener(`click`, () => {
     el.previousElementSibling.innerHTML++;
 })})
 
+const mintai = document.getElementById(`1`);
+console.log( mintai);
+
