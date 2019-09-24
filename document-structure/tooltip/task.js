@@ -1,21 +1,16 @@
 const hasTooltip = document.querySelectorAll(`.has-tooltip`);
 const hasTooltipArr = Array.from(hasTooltip);
 
+const tooltipDiv = document.createElement(`div`);
+
 hasTooltip.forEach((el) => {el.addEventListener(`click`, function () {
-    el.insertAdjacentHTML("afterend", 
-    `<div class="tooltip" style="left: 0; top: 0">${el.title}</div>`
-    );
-    const tooltip = document.querySelector(`.tooltip`);
-    tooltip.classList.toggle(`tooltip_active`);
+    tooltipDiv.classList.add(`tooltip`);
+    tooltipDiv.setAttribute(`style`, `left: ${el.getBoundingClientRect().left}px; top: ${el.getBoundingClientRect().top + 16}px`);
+    tooltipDiv.classList.toggle(`tooltip_active`);
+    tooltipDiv.innerText = `${el.title}`;
+    el.insertAdjacentElement("afterend", tooltipDiv);
+    
     event.preventDefault();
-
-    /*if (el.title == `Что бы вы хотели?`) {
-        tooltip.style = `left: 6px; top: 25px`;
-    } else if (el.title == `Устройтесь на работу!`) {
-        tooltip.style = `left: 162px; top: 25px`
-    }*/
-
-    tooltip.style = `${el.getBoundingClientRect()}`;
     
 })})
 
