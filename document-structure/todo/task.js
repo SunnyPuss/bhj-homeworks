@@ -4,8 +4,7 @@ const button = document.querySelector(`.tasks__add`);
 const crossArr = Array.from(cross);*/
 const taskList = document.querySelector(`.tasks__list`);
 
-
-button.addEventListener(`click`, function() {
+function TaskAdd () {
     taskList.innerHTML += `
     <div class="task">
         <div class="task__title">${input.value}</div>
@@ -15,30 +14,21 @@ button.addEventListener(`click`, function() {
     input.value = ``;
     event.preventDefault();
 
-    const cross = document.querySelector(`.task__remove`)
-    const task = document.querySelector(`.task`);
-    cross.addEventListener(`click`, () => {
-        task.remove();
+    const cross = document.querySelectorAll(`.task__remove`);
+    const crossArr = Array.from(cross);
+    const task = document.querySelectorAll(`.task`);
+    const taskArr = Array.from(task);
+    crossArr[crossArr.length - 1].addEventListener(`click`, () => {
+        taskArr[taskArr.length - 1].remove();
     })
     
-})
+}
+
+button.addEventListener(`click`, TaskAdd )
 
 input.addEventListener(`keypress`, function(e) {
     if (e.keyCode === 13) {
-        taskList.innerHTML += `
-        <div class="task">
-        <div class="task__title">${input.value}</div>
-        <a href="#" class="task__remove">&times;</a>
-        </div>
-        `;
-        input.value = ``;
-        event.preventDefault();
-
-        const cross = document.querySelector(`.task__remove`)
-        const task = document.querySelector(`.task`);
-        cross.addEventListener(`click`, () => {
-            task.remove();
-        })
+        TaskAdd
     }
 })
 
