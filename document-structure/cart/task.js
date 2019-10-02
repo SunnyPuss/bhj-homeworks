@@ -53,16 +53,17 @@ productAddArr.forEach((el) => {el.addEventListener(`click`, function() {
         }
     } else if (cartProduct.length > 0) {
         if (el.closest(`.product`).dataset.id == 1 && el.closest(`.product`).dataset.id == cartProduct.item(0).dataset.id) {
-            console.log(cartCount.item(0).innerHTML);
-            console.log(productQuantityValueArr[0].innerHTML);
-            cartCount.item(0).innerHTML += productQuantityValueArr[0].innerHTML;
+            cartCount.item(0).innerHTML = +cartCount.item(0).innerHTML + +productQuantityValueArr[0].innerHTML;
+        } else if (el.closest(`.product`).dataset.id == 1 && el.closest(`.product`).dataset.id != cartProduct.item(0).dataset.id) {
+            addMintai();
+        } else if (el.closest(`.product`).dataset.id == 2 && el.closest(`.product`).dataset.id == cartProduct.item(0).dataset.id) {
+            cartCount.item(0).innerHTML = +cartCount.item(0).innerHTML + +productQuantityValueArr[1].innerHTML;
+        } else if (el.closest(`.product`).dataset.id == 2 && cartProduct.item(1).dataset.id != null && el.closest(`.product`).dataset.id == cartProduct.item(1).dataset.id) {
+            cartCount.item(1).innerHTML = +cartCount.item(1).innerHTML + +productQuantityValueArr[1].innerHTML;
+        } else if (el.closest(`.product`).dataset.id == 2 && el.closest(`.product`).dataset.id != cartProduct.item(0).dataset.id) {
+            addAdultCook();
         }
     }
-    
-
-    
-
-
 
 })})
 

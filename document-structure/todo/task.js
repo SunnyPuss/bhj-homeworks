@@ -5,12 +5,12 @@ const crossArr = Array.from(cross);*/
 const taskList = document.querySelector(`.tasks__list`);
 
 function TaskAdd () {
-    taskList.innerHTML += `
+    taskList.insertAdjacentHTML("beforeend", `
     <div class="task">
         <div class="task__title">${input.value}</div>
         <a href="#" class="task__remove">&times;</a>
     </div>
-    `;
+    `);
     input.value = ``;
     event.preventDefault();
 
