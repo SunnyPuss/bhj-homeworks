@@ -20,50 +20,27 @@ productIncArr.forEach((el) => {el.addEventListener(`click`, () => {
     el.previousElementSibling.innerHTML++;
 })})
 
-function addMintai() {
-    cartProducts.insertAdjacentHTML("afterbegin" ,`
-            <div class="cart__product" data-id="1">
-                <img class="cart__product-image" src="https://cdn.pizket.com/images/photo/256x256/0d6b7f6630234586d3e8c7d43859b74f.jpg?1554367129">
-                <div class="cart__product-count">${productQuantityValueArr[0].innerHTML}</div>
-            </div>
-            `
-            )
-} 
-
-function addAdultCook () {
-    cartProducts.insertAdjacentHTML("beforeend" ,`
-            <div class="cart__product" data-id="2">
-                <img class="cart__product-image" src="https://cs8.pikabu.ru/post_img/2017/09/21/6/150598626812465714.jpg">
-                <div class="cart__product-count">${productQuantityValueArr[1].innerHTML}</div>
-            </div>
-            `
-            )
-}
-
 productAddArr.forEach((el) => {el.addEventListener(`click`, function() {
+    const productID = el.closest(`.product`).dataset.id;
     const cartProduct = document.querySelectorAll(`.cart__product`);
-    const cartCount = document.querySelectorAll(`.cart__product-count`);
+    const cartProductArr = Array.from(cartProduct);
+    const productImageSRC = el.closest(`.product`).querySelector(`img`).src;
+    const productValue = el.closest(`.product`).querySelector(`.product__quantity-value`);
 
+    cartProductArr.find(elem => productID == elem.dataset.id);
+    if (cartProductArr.find(elem => productID == elem.dataset.id) == undefined) {
 
-    if (cartProduct.length == 0) {
-        if (el.closest(`.product`).dataset.id == 1) {
-            addMintai();
-        } else if (el.closest(`.product`).dataset.id == 2) {
-            addAdultCook();
-        }
-    } else if (cartProduct.length > 0) {
-        if (el.closest(`.product`).dataset.id == 1 && el.closest(`.product`).dataset.id == cartProduct.item(0).dataset.id) {
-            cartCount.item(0).innerHTML = +cartCount.item(0).innerHTML + +productQuantityValueArr[0].innerHTML;
-        } else if (el.closest(`.product`).dataset.id == 1 && el.closest(`.product`).dataset.id != cartProduct.item(0).dataset.id) {
-            addMintai();
-        } else if (el.closest(`.product`).dataset.id == 2 && el.closest(`.product`).dataset.id == cartProduct.item(0).dataset.id) {
-            cartCount.item(0).innerHTML = +cartCount.item(0).innerHTML + +productQuantityValueArr[1].innerHTML;
-        } else if (el.closest(`.product`).dataset.id == 2 && cartProduct.item(1).dataset.id != null && el.closest(`.product`).dataset.id == cartProduct.item(1).dataset.id) {
-            cartCount.item(1).innerHTML = +cartCount.item(1).innerHTML + +productQuantityValueArr[1].innerHTML;
-        } else if (el.closest(`.product`).dataset.id == 2 && el.closest(`.product`).dataset.id != cartProduct.item(0).dataset.id) {
-            addAdultCook();
-        }
+        cartProducts.insertAdjacentHTML("beforeend" ,`
+        <div class="cart__product" data-id="${productID}">
+            <img class="cart__product-image" src ="${productImageSRC}">
+            <div class="cart__product-count">${productValue.innerHTML}</div>
+        </div>
+        `)
+    } else {
+        addedElement = cartProductArr.find(elem => productID == elem.dataset.id);
+        addedValue = addedElement.lastElementChild;
+        addedValue.innerHTML = +addedValue.innerHTML + +productValue.innerHTML;
     }
-
+    
 })})
 
